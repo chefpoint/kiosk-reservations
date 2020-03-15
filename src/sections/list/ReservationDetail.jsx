@@ -1,10 +1,10 @@
 /* * */
 /* IMPORTS */
 import React from "react";
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 import Player from "../../components/animation/Player";
-import animation from "../../components/animation/files/data.json";
+import animation from "../../components/animation/files/progress-bar.json";
 
 /* * */
 /* * * * */

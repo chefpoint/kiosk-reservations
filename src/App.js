@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router";
 
-import LocationSelector from "./sections/locationSelector/LocationSelector";
-import Home from "./sections/list/Home";
+import List from "./sections/list/List";
+// import Create from "./sections/create/Create";
 
 import "./styles/elements.css";
 
@@ -10,9 +10,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route path="/:location" component={Home} />
-        <Route path="/" component={LocationSelector} />
-        <Redirect to="/" />
+        <Route path="/list" component={List} />
+        {/* <Route path="/create" component={Create} /> */}
+        <Redirect to="/list" />
       </Switch>
     );
   }

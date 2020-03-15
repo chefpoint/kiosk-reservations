@@ -3,37 +3,19 @@
 import React from "react";
 import moment from "moment";
 
-import { Form, Col, InputGroup, Button } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
+
 import Select from "../../components/Select";
 import Input from "../../components/Input";
+
+import locations from "../../settings/locations";
 
 /* * */
 /* * * * */
 export default class Toolbar extends React.Component {
-  locations = [
-    { name: "TP Atlantico", id: "TP Atlantico" },
-    { name: "TP Nations", id: "TP Nations" },
-    { name: "TP Oceanario", id: "TP Oceanario" },
-    { name: "TP Centrum", id: "TP Centrum" }
-  ];
-
-  dates = [
-    { name: "Sempre", id: "" },
-    {
-      name: "Ontem",
-      id: moment()
-        .add(-1, "day")
-        .format("DD MMM YYYY")
-    },
-    { name: "Hoje", id: moment().format("DD MMM YYYY") },
-    {
-      name: "Amanhã",
-      id: moment()
-        .add(1, "day")
-        .format("DD MMM YYYY")
-    }
-  ];
-
   render() {
     return (
       <Form className="pt-4 w-100" onSubmit={this.props.onSubmit}>
@@ -41,7 +23,7 @@ export default class Toolbar extends React.Component {
           <Form.Group as={Col} md={2} controlId="toolbarLocation">
             <Select
               name="location"
-              options={this.locations}
+              options={locations}
               onChange={this.props.onLocationChange}
             />
           </Form.Group>
@@ -49,7 +31,22 @@ export default class Toolbar extends React.Component {
           <Form.Group as={Col} md={2} controlId="toolbarDate">
             <Select
               name="date"
-              options={this.dates}
+              options={[
+                { name: "Sempre", id: "" },
+                {
+                  name: "Ontem",
+                  id: moment()
+                    .add(-1, "day")
+                    .format("DD MMM YYYY")
+                },
+                { name: "Hoje", id: moment().format("DD MMM YYYY") },
+                {
+                  name: "Amanhã",
+                  id: moment()
+                    .add(1, "day")
+                    .format("DD MMM YYYY")
+                }
+              ]}
               onChange={this.props.onDateChange}
             />
           </Form.Group>

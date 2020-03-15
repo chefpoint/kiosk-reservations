@@ -66,9 +66,7 @@ export default function Table({ reservations, loading, error, onClick }) {
         </table>
       )}
 
-      {loading && (
-        <Player animationData={animation} height={200} align="center" />
-      )}
+      {loading && <Player animationData={animation} height={200} />}
 
       {!loading && error && (
         <React.Fragment>

@@ -1,7 +1,6 @@
 /* * */
 /* IMPORTS */
 import React from "react";
-
 import _ from "lodash";
 
 import Container from "react-bootstrap/Container";
@@ -16,7 +15,7 @@ import spreadsheets from "../../services/spreadsheets";
 
 /* * */
 /* * * * */
-export default class Home extends React.Component {
+export default class List extends React.Component {
   state = {
     toolbar_location: "TP Atlantico",
     toolbar_date: "",
@@ -63,11 +62,6 @@ export default class Home extends React.Component {
       }),
       reservationDetail_visible: true
     });
-    console.log(
-      _.find(this.state.table_reservations, {
-        orderID: orderID
-      })
-    );
   };
 
   toggleReservationStatus = async () => {
@@ -78,7 +72,6 @@ export default class Home extends React.Component {
       "status",
       reservation.status === "Entregue" ? "Por Levantar" : "Entregue"
     );
-    // this.setState({ reservationDetail_visible: false });
     await this.getReservations();
     this.displayReservationDetail(reservation.orderID);
     this.setState({ reservationDetail_loading: false });
