@@ -18,11 +18,16 @@ import spreadsheets from "../../services/spreadsheets";
 /* * * * */
 export default class Home extends React.Component {
   state = {
+    toolbar_location: "TP Atlantico",
+    toolbar_date: "",
+    toolbar_search: "",
+
     table_reservations: [],
     table_loading: true,
     table_error: "",
 
     reservationDetail_reservation: [],
+    reservationDetail_loading: false,
     reservationDetail_visible: false,
     reservationDetail_error: ""
   };
@@ -31,17 +36,23 @@ export default class Home extends React.Component {
     try {
       this.setState({ table_loading: true });
       let reservations = await spreadsheets.listRows();
+      reservations = reservations.slice(1);
+      reservations = _.filter(reservations, r => {
+        return (
+          r.location === this.state.toolbar_location &&
+          r.customerName.includes(this.state.toolbar_search) &&
+          r.pickupDate.includes(this.state.toolbar_date)
+        );
+      });
+      reservations = _.orderBy(reservations, ["status"], ["desc"]);
       this.setState({
-        table_reservations: _.orderBy(
-          reservations.slice(1),
-          ["status"],
-          ["desc"]
-        ),
+        table_reservations: reservations,
         table_loading: false,
         table_error: ""
       });
     } catch (err) {
-      this.setState({ table_loading: false, table_error: err });
+      console.log(err);
+      this.setState({ table_loading: false });
     }
   };
 
@@ -59,15 +70,8 @@ export default class Home extends React.Component {
     );
   };
 
-  filterReservations = orderID => {
-    this.setState({
-      table_reservations: _.filter(this.state.table_reservations, {
-        orderID: orderID
-      })
-    });
-  };
-
   toggleReservationStatus = async () => {
+    this.setState({ reservationDetail_loading: true });
     const reservation = this.state.reservationDetail_reservation;
     await spreadsheets.updateRows(
       reservation.rowNumber,
@@ -75,7 +79,9 @@ export default class Home extends React.Component {
       reservation.status === "Entregue" ? "Por Levantar" : "Entregue"
     );
     // this.setState({ reservationDetail_visible: false });
-    this.getReservations();
+    await this.getReservations();
+    this.displayReservationDetail(reservation.orderID);
+    this.setState({ reservationDetail_loading: false });
   };
 
   componentDidMount() {
@@ -89,6 +95,7 @@ export default class Home extends React.Component {
           <Header />
           <ReservationDetail
             visible={this.state.reservationDetail_visible}
+            loading={this.state.reservationDetail_loading}
             reservation={this.state.reservationDetail_reservation}
             toggleStatus={() => this.toggleReservationStatus()}
             invisible={() =>
@@ -97,8 +104,20 @@ export default class Home extends React.Component {
           />
           <Row>
             <Toolbar
-              value={this.state.search}
-              onChange={event => this.setState({ badgeID: event.target.value })}
+              onLocationChange={event =>
+                this.setState({ toolbar_location: event.target.value })
+              }
+              onDateChange={event =>
+                this.setState({ toolbar_date: event.target.value })
+              }
+              search={this.state.toolbar_search}
+              onSearchChange={event =>
+                this.setState({ toolbar_search: event.target.value })
+              }
+              onSubmit={event => {
+                event.preventDefault();
+                this.getReservations();
+              }}
             />
           </Row>
           <Row>

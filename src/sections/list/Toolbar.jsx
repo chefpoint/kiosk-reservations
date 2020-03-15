@@ -1,6 +1,7 @@
 /* * */
 /* IMPORTS */
 import React from "react";
+import moment from "moment";
 
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import Select from "../../components/Select";
@@ -10,24 +11,42 @@ import Input from "../../components/Input";
 /* * * * */
 export default class Toolbar extends React.Component {
   locations = [
-    { name: "TP Atlântico", id: "5958000" },
-    { name: "TP Nations", id: "18827493" },
-    { name: "TP Oceanario", id: "23141531" },
-    { name: "TP Centrum", id: "44123848" }
+    { name: "TP Atlantico", id: "TP Atlantico" },
+    { name: "TP Nations", id: "TP Nations" },
+    { name: "TP Oceanario", id: "TP Oceanario" },
+    { name: "TP Centrum", id: "TP Centrum" }
   ];
 
   dates = [
-    { name: "Todos os Meses", id: "since=2020-01-01&until=2020-12-31" },
-    { name: "Janeiro 2020", id: "since=2020-01-01&until=2020-01-31" },
-    { name: "Fevereiro 2020", id: "since=2020-02-01&until=2020-02-29" },
-    { name: "Março 2020", id: "since=2020-03-01&until=2020-03-31" }
+    { name: "Sempre", id: "" },
+    {
+      name: "Ontem",
+      id: moment()
+        .add(-1, "day")
+        .format("DD MMM YYYY")
+    },
+    { name: "Hoje", id: moment().format("DD MMM YYYY") },
+    {
+      name: "Amanhã",
+      id: moment()
+        .add(1, "day")
+        .format("DD MMM YYYY")
+    }
   ];
 
   render() {
     return (
       <Form className="pt-4 w-100" onSubmit={this.props.onSubmit}>
         <Form.Row>
-          <Form.Group as={Col} md={3} controlId="toolbarDate">
+          <Form.Group as={Col} md={2} controlId="toolbarLocation">
+            <Select
+              name="location"
+              options={this.locations}
+              onChange={this.props.onLocationChange}
+            />
+          </Form.Group>
+
+          <Form.Group as={Col} md={2} controlId="toolbarDate">
             <Select
               name="date"
               options={this.dates}
@@ -52,7 +71,7 @@ export default class Toolbar extends React.Component {
 
           <Form.Group as={Col} md={2} controlId="toolbarSubmit">
             <Button type="submit" block>
-              Ver Reservas
+              Filtrar Reservas
             </Button>
           </Form.Group>
         </Form.Row>

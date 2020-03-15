@@ -61,34 +61,6 @@
 
 /* * */
 /* * * * */
-/* BADGE INPUT FIELD */
-.badgeInput {
-  width: 100%;
-  border: 0;
-  outline: none;
-  background: none;
-  color: transparent;
-  text-shadow: 0 0 0 rgb(60, 120, 75);
-  text-align: center;
-  font-size: 30pt;
-  font-family: system, -apple-system-headline, BlinkMacSystemFont,
-    "Helvetica Neue", "Lucida Grande";
-}
-
-.badgeInput::placeholder {
-  text-shadow: 0 0 0 rgb(250, 250, 250);
-}
-
-::selection {
-  background-color: transparent;
-}
-
-.badgeInput:focus {
-  outline: none;
-}
-
-/* * */
-/* * * * */
 /* PRODUCT CARDS */
 .productIsSelected {
   color: rgb(20, 45, 30);
