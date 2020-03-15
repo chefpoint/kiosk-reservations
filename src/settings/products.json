@@ -1,0 +1,26 @@
+[
+  {
+    "id": "soup",
+    "icon": "🍲",
+    "title": "Sopa",
+    "price": 0
+  },
+  {
+    "id": "salad",
+    "icon": "🥗",
+    "title": "Salada",
+    "price": 0
+  },
+  {
+    "id": "bread",
+    "icon": "🍞",
+    "title": "Pão",
+    "price": 0
+  },
+  {
+    "id": "fruit",
+    "icon": "🍎",
+    "title": "Fruta",
+    "price": 0
+  }
+]

@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import LocationSelector from "./sections/locationSelector/LocationSelector";
+import Home from "./sections/list/Home";
+
+import "./styles/elements.css";
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <Switch>
+        <Route path="/:location" component={Home} />
+        <Route path="/" component={LocationSelector} />
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
 }
-
-export default App;
