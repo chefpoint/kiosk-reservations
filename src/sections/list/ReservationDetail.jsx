@@ -12,7 +12,15 @@ export default class ReservationDetail extends React.Component {
         <React.Fragment>
           <div className="overlay">
             <div className="card card-center depth animate">
-              <h5 className="card-header">Reserva</h5>
+              <div className="card-header">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={this.props.invisible}
+                >
+                  Fechar
+                </Button>
+              </div>
               <div className="card-body pb-0">
                 <p className="card-text mb-0">
                   <small>Reserva em nome de</small>
@@ -65,14 +73,18 @@ export default class ReservationDetail extends React.Component {
               </ul>
               <div className="card-body">
                 {this.props.reservation.status === "Entregue" ? (
-                  <Button variant="danger">Marcar como Não Entregue</Button>
+                  <Button variant="danger" onClick={this.props.toggleStatus}>
+                    Marcar como Não Entregue
+                  </Button>
                 ) : (
-                  <Button variant="success">Marcar como Entregue</Button>
+                  <Button variant="success" onClick={this.props.toggleStatus}>
+                    Marcar como Entregue
+                  </Button>
                 )}
               </div>
               <div className="card-footer">
                 <small className="text-muted">
-                  # Ref : {this.props.reservation.orderID}
+                  {this.props.reservation.orderID}
                 </small>
               </div>
             </div>

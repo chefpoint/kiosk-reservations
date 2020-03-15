@@ -30,9 +30,13 @@ export default class Home extends React.Component {
   getReservations = async () => {
     try {
       this.setState({ table_loading: true });
-      const reservations = await spreadsheets.listRows();
+      let reservations = await spreadsheets.listRows();
       this.setState({
-        table_reservations: reservations.slice(1),
+        table_reservations: _.orderBy(
+          reservations.slice(1),
+          ["status"],
+          ["desc"]
+        ),
         table_loading: false,
         table_error: ""
       });
@@ -63,6 +67,17 @@ export default class Home extends React.Component {
     });
   };
 
+  toggleReservationStatus = async () => {
+    const reservation = this.state.reservationDetail_reservation;
+    await spreadsheets.updateRows(
+      reservation.rowNumber,
+      "status",
+      reservation.status === "Entregue" ? "Por Levantar" : "Entregue"
+    );
+    // this.setState({ reservationDetail_visible: false });
+    this.getReservations();
+  };
+
   componentDidMount() {
     this.getReservations();
   }
@@ -75,6 +90,7 @@ export default class Home extends React.Component {
           <ReservationDetail
             visible={this.state.reservationDetail_visible}
             reservation={this.state.reservationDetail_reservation}
+            toggleStatus={() => this.toggleReservationStatus()}
             invisible={() =>
               this.setState({ reservationDetail_visible: false })
             }
