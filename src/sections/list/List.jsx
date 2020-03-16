@@ -50,7 +50,7 @@ export default class List extends React.Component {
         table_error: ""
       });
     } catch (err) {
-      console.log(err);
+      throw err;
       this.setState({ table_loading: false });
     }
   };
