@@ -23,7 +23,6 @@ async function updateRows(index, key, value) {
   await doc.loadInfo();
   const sheet = doc.sheetsById[settings["google-sheets-sheet-id"]];
   const rows = await sheet.getRows();
-  console.log(rows);
   rows[index - 2][key] = value;
   await rows[index - 2].save();
 }
