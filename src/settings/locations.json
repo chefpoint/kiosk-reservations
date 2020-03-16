@@ -1,1 +1,6 @@
-[{ "name": "TP Centrum", "id": "TP Centrum" }]
+[
+  { "name": "TP Atlantico", "id": "TP Atlantico" },
+  { "name": "TP Centrum", "id": "TP Centrum" },
+  { "name": "TP Nations", "id": "TP Nations" },
+  { "name": "TP Oceanario", "id": "TP Oceanario" }
+]

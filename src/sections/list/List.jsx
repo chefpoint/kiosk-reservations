@@ -38,7 +38,7 @@ export default class List extends React.Component {
       reservations = reservations.slice(1);
       reservations = _.filter(reservations, r => {
         return (
-          r.location === this.state.toolbar_location &&
+          r.location.includes(this.state.toolbar_location) &&
           r.customerName.includes(this.state.toolbar_search) &&
           r.pickupDate.includes(this.state.toolbar_date)
         );
@@ -50,8 +50,8 @@ export default class List extends React.Component {
         table_error: ""
       });
     } catch (err) {
-      throw err;
       this.setState({ table_loading: false });
+      throw err;
     }
   };
 
