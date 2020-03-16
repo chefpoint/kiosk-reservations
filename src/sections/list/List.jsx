@@ -17,7 +17,7 @@ import spreadsheets from "../../services/spreadsheets";
 /* * * * */
 export default class List extends React.Component {
   state = {
-    toolbar_location: "TP Atlantico",
+    toolbar_location: "",
     toolbar_date: "",
     toolbar_search: "",
 
