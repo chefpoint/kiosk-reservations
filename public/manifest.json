@@ -1,6 +1,6 @@
 {
-  "name": "Kiosk",
-  "short_name": "Kiosk",
+  "name": "CHEF POINT Kiosk - Reservations",
+  "short_name": "Reservations",
   "start_url": ".",
   "display": "standalone",
   "orientation": "landscape",
