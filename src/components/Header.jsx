@@ -13,7 +13,7 @@ class Header extends React.Component {
         <img
           className="cursor-pointer"
           src={logo}
-          width={280}
+          height={100}
           alt="chefpoint-logo"
           onClick={() => (window.location = "/")}
         />
